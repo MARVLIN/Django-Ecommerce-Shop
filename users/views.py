@@ -1,5 +1,10 @@
+import email
+
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from store.models import Customer
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
@@ -11,7 +16,12 @@ def register(request):
         if form.is_valid():
             form.save()  # This line saves the user information and hashes the password
             username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            Customer.objects.create(user=user, name=username, email=email)
             messages.success(request, f'Your account has been updated! You are now able to log in')
+            login(request, user)
+
             return redirect('login')
     else:
         form = UserRegisterForm()
