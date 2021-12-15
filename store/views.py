@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -94,3 +95,17 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment submitted..', safe=False)
+
+def itemspage(request):
+    if request.method == 'GET':
+        items = Item.objects.filter(owner=None)
+        return render(request, template_name='store/items.html', context= {'items' : items})
+    if request.method == 'POST':
+        purchased_item = request.POST.get('purchased-item')
+        if purchased_item:
+            purchased_item_object = Item.objects.get(name=purchased_item)
+            purchased_item_object.owner = request.user
+            purchased_item_object.save()
+            messages.success(request, f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
+
+        return redirect('items')
