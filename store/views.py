@@ -3,11 +3,16 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
+from .models import Product
+from django.views.generic import ListView
 
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
 from .utils import cookieCart, cartData, guestOrder
+
+from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def store(request):
@@ -22,6 +27,17 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
+def school_uniform(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    products = SchoolUniform.objects.all()
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/school_uniform.html', context)
+
+
 def cart(request):
     data = cartData(request)
 
@@ -31,6 +47,7 @@ def cart(request):
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
+
 
 def checkout(request):
     data = cartData(request)
@@ -68,6 +85,7 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+
 # @csrf_exempt
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
@@ -98,16 +116,27 @@ def processOrder(request):
 
     return JsonResponse('Payment submitted..', safe=False)
 
+
 def itemspage(request):
     if request.method == 'GET':
         items = Item.objects.filter(owner=None)
-        return render(request, template_name='store/items.html', context= {'items' : items})
+        return render(request, template_name='store/items.html', context={'items': items})
     if request.method == 'POST':
         purchased_item = request.POST.get('purchased-item')
         if purchased_item:
             purchased_item_object = Item.objects.get(name=purchased_item)
             purchased_item_object.owner = request.user
             purchased_item_object.save()
-            messages.success(request, f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
+            messages.success(request,
+                             f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
 
         return redirect('items')
+
+
+class ProductList(ListView):
+    model = Product
+
+
+def product_detail(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, 'store/product.html', {'product': product})

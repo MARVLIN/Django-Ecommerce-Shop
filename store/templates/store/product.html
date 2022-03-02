@@ -1,0 +1,70 @@
+{% extends "store/main.html" %}
+
+
+
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tutorial</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <!-- CSS -->
+    <link href="static/css/style.css" rel="stylesheet">
+    <meta name="robots" content="noindex,follow" />
+
+  </head>
+
+  <body>
+    <main class="container">
+
+      <!-- Left Column / Headphones Image -->
+
+
+
+      <!-- Right Column -->
+      <div class="right-column">
+
+        <!-- Product Description -->
+        <div class="product-description">
+          <span></span>
+            <h1>{{product.name}}</h1>
+                  <div class="left-column">
+        <img data-image="black" src="{{ product.imageURL }}">
+
+
+      </div>
+            <p>"{{product.description}}"</p>
+        </div>
+
+
+        <!-- Product Configuration -->
+
+        </div>
+
+        <!-- Product Pricing -->
+        <div class="product-price">
+            <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+            <div class="product-configuration">
+              <a href="#">How to take the measurements</a>
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script src="static/js/script.js" charset="utf-8"></script>
+  </body>
+</html>
+
+{% endblock %}
+
