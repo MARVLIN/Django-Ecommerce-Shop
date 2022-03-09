@@ -27,17 +27,6 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
-def school_uniform(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
-
-    products = SchoolUniform.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'store/school_uniform.html', context)
-
-
 def cart(request):
     data = cartData(request)
 
@@ -117,26 +106,15 @@ def processOrder(request):
     return JsonResponse('Payment submitted..', safe=False)
 
 
-def itemspage(request):
-    if request.method == 'GET':
-        items = Item.objects.filter(owner=None)
-        return render(request, template_name='store/items.html', context={'items': items})
-    if request.method == 'POST':
-        purchased_item = request.POST.get('purchased-item')
-        if purchased_item:
-            purchased_item_object = Item.objects.get(name=purchased_item)
-            purchased_item_object.owner = request.user
-            purchased_item_object.save()
-            messages.success(request,
-                             f'Congratulations. You just bought {purchased_item_object.name} for {purchased_item_object.price}')
-
-        return redirect('items')
-
-
 class ProductList(ListView):
     model = Product
 
 
-def product_detail(request, pk):
-    product = Product.objects.get(id=pk)
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
     return render(request, 'store/product.html', {'product': product})
+
+
+
+
+

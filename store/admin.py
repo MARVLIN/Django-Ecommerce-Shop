@@ -9,4 +9,3 @@ admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
 admin.site.register(Item)
 
-admin.site.register(SchoolUniform)
