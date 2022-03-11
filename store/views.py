@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 import json
 import datetime
@@ -110,9 +110,25 @@ class ProductList(ListView):
     model = Product
 
 
-def product_detail(request, id):
-    product = Product.objects.get(id=id)
-    return render(request, 'store/product.html', {'product': product})
+def product_detail(request, category_slug, slug):
+    product = Product.objects.get(slug=slug)
+
+    context = {
+        'product': product
+    }
+    return render(request, 'store/product.html', context)
+
+def category_detail(request, slug, ):
+    category = get_object_or_404(Category, slug=slug)
+    products = category.products.all()
+
+    context = {
+        'category': category,
+        'products': products
+    }
+
+    return render(request, 'store/category_detail.html', context)
+
 
 
 

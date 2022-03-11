@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -13,12 +15,27 @@ class Customer(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid1)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.title
+
+
 class Product(models.Model):
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=200)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid1)
+
+
 
     def __str__(self):
         return self.name

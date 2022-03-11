@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import product_detail
+from .views import product_detail, category_detail
 
 urlpatterns = [
     # Leave as empty string for base url
@@ -13,5 +13,7 @@ urlpatterns = [
     path('process_order/', views.processOrder, name="process_order"),
 
 
-    path('products/<int:id>/', product_detail, name='product-detail')
+    path('<slug:category_slug>/<slug:slug>/', product_detail, name='product-detail'),
+    path('<slug:slug>/', category_detail, name='category_detail')
+
 ]
