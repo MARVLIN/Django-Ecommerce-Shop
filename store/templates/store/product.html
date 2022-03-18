@@ -37,12 +37,25 @@
           <span></span>
             <h1>{{product.name}}</h1>
                   <div class="left-column">
-        <img data-image="black" src="{{ product.imageURL }}">
+        <img data-image="black" src="{{ product.imageURL }}"
+             width="400"
+             height="500">
 
 
       </div>
             <p>"{{product.description}}"</p>
         </div>
+
+          <div class="col-sm-4 pull-right">
+
+                  {% if product.variation_set.all %}
+                  <select class="form-control" name="size">
+                      {% for products in product.variation_set.all %}
+                        <option value="{{ products }}">{{ products }}</option>
+                      {% endfor %}
+                  </select>
+              {% endif %}
+
 
 
         <!-- Product Configuration -->

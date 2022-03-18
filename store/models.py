@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -35,8 +37,6 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, default=uuid.uuid1)
 
-
-
     def __str__(self):
         return self.name
 
@@ -47,6 +47,43 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+
+    class Meta:
+        unique_together = ('name', 'slug')
+
+    def get_price(self):
+        return self.price
+
+    def get_absolute_url(self):
+        return reverse('single_product', kwargs={'slug': self.slug})
+
+
+class VariationManager(models.Manager):
+    def sizes(self):
+        return super(VariationManager, self).filter(category='size')
+
+    def colors(self):
+        return super(VariationManager, self).filter(category='colors')
+
+
+VAR_CATEGORIES = (
+    ('size', 'size'),
+    ('color', 'color')
+)
+
+
+class Variation(models.Model):
+    title = models.CharField(max_length=50)
+    category = models.CharField(max_length=120, choices=VAR_CATEGORIES, default='size')
+    price = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=100)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    objects = VariationManager
+
+    def __str__(self):
+        return self.title
+
 
 
 class Order(models.Model):
@@ -90,6 +127,9 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
+    def __str__(self):
+        return self.product.name
 
 
 class ShippingAddress(models.Model):

@@ -112,13 +112,16 @@ class ProductList(ListView):
 
 def product_detail(request, category_slug, slug):
     product = Product.objects.get(slug=slug)
+    variation = Variation.objects.all()
 
     context = {
-        'product': product
+        'product': product,
+        'variation': variation
     }
     return render(request, 'store/product.html', context)
 
-def category_detail(request, slug, ):
+
+def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = category.products.all()
 
