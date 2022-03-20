@@ -5,51 +5,99 @@
 {% block content %}
 {% load static %}
 
-
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tutorial</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <!-- CSS -->
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta name="robots" content="noindex,follow" />
+    <html>
 
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <title>undefined</title>
+        <meta name="generator" content="Google Web Designer 14.0.4.1108">
+        <style type="text/css" id="gwd-text-style">
+            p {
+                margin: 0px;
+            }
 
-  <body>
-    <main class="container">
+            h1 {
+                margin: 0px;
+            }
 
-      <!-- Left Column / Headphones Image -->
+            h2 {
+                margin: 0px;
+            }
+
+            h3 {
+                margin: 0px;
+            }
+        </style>
+        <style type="text/css">
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+            }
+
+            body {
+                background-color: transparent;
+                transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+                transform-style: preserve-3d;
+            }
+
+            .gwd-p-1gch {
+                position: absolute;
+                left: 170px;
+                top: 150px;
+                transform-origin: 50% 50% 0px;
+                width: 608px;
+                height: 754px;
+            }
+
+            .gwd-p-mo95 {
+                position: absolute;
+                width: 287.5px;
+                height: 159px;
+                left: 1069px;
+                top: 176px;
+            }
+
+            .gwd-p-uzyv {
+                position: absolute;
+                top: 363px;
+                width: 195px;
+                height: 64px;
+                left: 547px;
+                transform-style: preserve-3d;
+                transform: translate3d(568px, 36px, 0px) rotateZ(0.0363239deg);
+            }
+        </style>
+    </head>
+
+    <h3 class="htmlNoPages">
+        <h2>{{ product.name }}
+
+        </h2>
+        <p class="gwd-p-1gch">
+            <img data-image="black" src="{{ product.imageURL }}"
+                 width="400"
+                 height="500">
+        </p>
+
+        <p class="gwd-p-mo95">
+
+            {{ product.description }}
+        <div class="col-sm-4 pull-right">
 
 
 
-      <!-- Right Column -->
-      <div class="right-column">
 
-        <!-- Product Description -->
-        <div class="product-description">
-          <span></span>
-            <h1>{{product.name}}</h1>
-                  <div class="left-column">
-        <img data-image="black" src="{{ product.imageURL }}"
-             width="400"
-             height="500">        <h4>Description:</h4>
-                                  <p>"{{product.description}}"</p>
+                <!-- Product Configuration -->
 
-
-
-      </div>
-        </div>
-
-          <div class="col-sm-4 pull-right">
-
-                  {% if product.variation_set.all %}
+</div>
+    <div>
+        <h1 style="padding-left:920px; padding-top: 400px;  font-family:sans-serif; ">
+            <button data-product="{{ product.id }}" data-action="add"
+                    class="btn btn-outline-secondary add-btn update-cart">ADD TO CART
+            </button>
+                              {% if product.variation_set.all %}
                   <select class="form-control" name="size">
                       {% for products in product.variation_set.all %}
                         <option value="{{ products }}">{{ products }}</option>
@@ -58,26 +106,20 @@
               {% endif %}
 
 
+        </h1>
 
-        <!-- Product Configuration -->
 
         </div>
 
-        <!-- Product Pricing -->
-        <div class="product-price">
-            <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+        <p class="gwd-p-uzyv">
+        <h1 style="padding-left:920px; padding-top: 20px; font-family:sans-serif; ">£ {{ product.price }}</h1>
 
-            <div class="product-configuration">
-              <a href="#">How to take the measurements</a>
-            </div>
-        </div>
-      </div>
-    </main>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    <script src="static/js/script.js" charset="utf-8"></script>
-  </body>
-</html>
+        </p>
+
+        </h3>
+    </div>
+    </html>
+
 
 {% endblock %}
