@@ -23,7 +23,8 @@ def store(request):
     items = data['items']
 
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    obj = Carousel.objects.all()
+    context = {'products': products, 'cartItems': cartItems, 'obj': obj}
     return render(request, 'store/store.html', context)
 
 
@@ -127,11 +128,10 @@ def category_detail(request, slug):
 
     context = {
         'category': category,
-        'products': products
+        'products': products,
     }
 
     return render(request, 'store/category_detail.html', context)
-
 
 
 
