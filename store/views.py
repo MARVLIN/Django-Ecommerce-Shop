@@ -4,7 +4,7 @@ from django.http import JsonResponse
 import json
 import datetime
 from .models import Product
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -14,6 +14,7 @@ from .utils import cookieCart, cartData, guestOrder
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from django.db.models import Q
 
 def store(request):
     data = cartData(request)
@@ -133,7 +134,12 @@ def category_detail(request, slug):
 
     return render(request, 'store/category_detail.html', context)
 
+class SearchResultsView(ListView):
+    model = Product
+    template_name = 'store/search.html'
+    context_object_name = 'products'
 
-
-
-
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        products = Product.objects.filter(Q(name__icontains=query))
+        return products

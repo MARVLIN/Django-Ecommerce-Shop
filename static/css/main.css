@@ -22,7 +22,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .product{
-	border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 10px;
 }
 
 .bg-dark{
@@ -139,4 +139,22 @@ position:relative;
 .hidden{
 	display: none!important;
 }
+
+.carousel-inner .carousel-caption {
+    padding-bottom: 170px;
+}
+
+.carousel-inner .carousel-ception h1 {
+    font-family: 'Coiny', cursive;
+    font-size: 56px;
+}
+
+.carousel-inner .carousel-caption h3 {
+    font-family: 'Coiny', cursive;
+}
+
+.navbarSearch {
+	padding-left: 200px;
+}
+
 
