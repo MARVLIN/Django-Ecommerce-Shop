@@ -1,8 +1,10 @@
+
+
 .carousel-inner .carousel-caption {
     padding-bottom: 170px;
 }
 
-.carousel-inner .carousel-ception h1 {
+.carousel-inner .carousel-caption h1 {
     font-family: 'Coiny', cursive;
     font-size: 56px;
 }
@@ -23,3 +25,4 @@
     background: cornflowerblue;
     color: white;
 }
+
