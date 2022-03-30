@@ -22,7 +22,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .product{
-	border-radius: 0 0 4px 10px;
+	border-radius: 25px 25px;
+
 }
 
 .bg-dark{
@@ -60,6 +61,7 @@ h1,h2,h3,h4,h5,h6{
 
 .row-image{
 	width: 100px;
+
 }
 
 .form-field{
@@ -129,12 +131,11 @@ h1,h2,h3,h4,h5,h6{
 
 hr.rounded {
   border-top: 8px solid #bbb;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
-
-
-
-
+.box_product_element {
+	border-radius: 20px;
+}
 
 

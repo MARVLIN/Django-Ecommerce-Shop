@@ -91,6 +91,162 @@ function myFunction() {
 }
 
 
+
+
+
+* {
+  outline: none;
+}
+
+html,
+body {
+  height: 80%;
+  min-height: 80%;
+}
+
+body {
+  margin: 0;
+  background-color: #ffd8d8;
+}
+
+.tb {
+  display: table;
+  width: 100%;
+}
+
+.td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+input,
+button {
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+#cover {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 350px;
+  padding: 40px;
+  margin: -83px auto 0 auto;
+  background-color: #676c7b;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px #3a3a3d, 0 0 0 20px #ffffffeb;
+  transform: scale(0.6);
+}
+
+form {
+  height: 40px;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 96px;
+  font-size: 23px;
+  line-height: 1;
+}
+
+input[type="text"]::placeholder {
+  color: #aedce9;
+}
+
+#s-cover {
+  width: 1px;
+  padding-left: 35px;
+}
+
+button {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 40px;
+  cursor: pointer;
+}
+
+#s-circle {
+  position: relative;
+  top: -8px;
+  left: 0;
+  width: 23px;
+  height: 12px;
+  margin-top: 0;
+  border-width: 15px;
+  border: 15px solid #383b3c;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: 0.5s ease all;
+}
+
+button span {
+  position: absolute;
+  top: 68px;
+  left: 43px;
+  display: block;
+  width: 45px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 10px;
+  transform: rotateZ(52deg);
+  transition: 0.5s ease all;
+}
+
+button span:before,
+button span:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 15px;
+  background-color: #383b3c;
+  border-radius: 10px;
+  transform: rotateZ(0);
+  transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle {
+  top: -1px;
+  width: 67px;
+  height: 15px;
+  border-width: 0;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+#s-cover:hover span {
+  top: 50%;
+  left: 56px;
+  width: 25px;
+  margin-top: -9px;
+  transform: rotateZ(0);
+}
+
+#s-cover:hover button span:before {
+  bottom: 11px;
+  transform: rotateZ(52deg);
+}
+
+#s-cover:hover button span:after {
+  bottom: -11px;
+  transform: rotateZ(-52deg);
+}
+#s-cover:hover button span:before,
+#s-cover:hover button span:after {
+  right: -6px;
+  width: 40px;
+  background-color: #fff;
+}
+
+
+
+
 </style>
 
 </head>
@@ -126,17 +282,22 @@ function myFunction() {
 
 
 	    </ul>
-      <ul class="navbar-nav mr-auto">
-              <form action="/search" method="get">
-                  <input type="text" class="form-control" name="search" id="search exampleInputPassword1" placeholder="Search a Product">
-
-
-            {% csrf_token %}
-
-            </form>
-      </ul>
 
             </div>
+
+        <div id="cover">
+            <form method="get" action="/search">
+            <div class="tb">
+                <div class="td"><input type="text" placeholder="Search" name="search" required></div>
+                    <div class="td" id="s-cover">
+                    <button type="submit">
+                        <div id="s-circle"></div>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            </form>
+        </div>
 
 
 	    <div class="form-inline my-2 my-lg-0">
@@ -186,7 +347,7 @@ function myFunction() {
 	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 
 
-<hr style="width:0%">
+<hr style="width:0">
 
 <div class="footer">
 

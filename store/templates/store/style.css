@@ -27,16 +27,8 @@
 }
 
 
-
-
-
-
-
-
-
-
 .product{
-	border-radius: 0 0 4px 10px;
+	border-radius: 0 0 10px 10px;
 }
 
 .bg-dark{
@@ -50,7 +42,7 @@
 	margin-left: 15px;
 }
 
-#cart-total{
+.cart-total{
 	display: block;
 	text-align: center;
 	color:#fff;
@@ -110,6 +102,4 @@
 .chg-quantity:hover{
 	opacity: .6;
 }
-
-
 
