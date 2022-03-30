@@ -25,7 +25,7 @@
 <div class="carousel-inner">
     {% for object in obj %}
     <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-        <img src="{{ object.image.url }}" style="height: 585px;" class="img-fluid d-block w-100" alt="">
+        <img src="{{ object.image.url }}" style="height: 585px; border-radius: 20px;" class="img-fluid d-block w-100" alt="">
         <div class="carousel-caption d-none d-md-block">
             <h1 class="animate__animated animate__fadeInDown">{{ object.title }}</h1>
 
@@ -38,11 +38,11 @@
     </div>
 </div>
 </div>
-<hr class="solid">
+            <hr style="width:0%">
 <!-- The form -->
 
 
-    <hr class="solid">
+            <hr style="width:0%">
 
 
 	<div class="row">
@@ -50,7 +50,7 @@
 		{% for product in products %}
 		<div class="col-lg-3">
             <hr style="width:0%">
-			<img class="thumbnail" src="{{ product.imageURL }}" alt="">
+			<img class="thumbnail" src="{{ product.imageURL }}" style="border-radius: 15px;" alt="">
 
 			<div class="box-element product" id="box_product_element">
 				<h6><strong>{{product.name}}</strong></h6>

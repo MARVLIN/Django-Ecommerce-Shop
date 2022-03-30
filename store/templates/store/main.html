@@ -177,9 +177,8 @@ button {
   width: 23px;
   height: 12px;
   margin-top: 0;
-  border-width: 15px;
-  border: 15px solid #383b3c;
-  background-color: transparent;
+    border: 30px solid #383b3c;
+    background-color: transparent;
   border-radius: 50%;
   transition: 0.5s ease all;
 }
@@ -262,28 +261,36 @@ button span:after {
         <a class="navbar-brand" href="{% url 'store' %}">Merchiston Eshop</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
-
 	  </button>
 
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 	    <ul class="navbar-nav mr-auto">
 
+            <li class="nav-item active">
+
+            <a class="nav-link" href="$">About</a>
+
+            </li>
+
             {% for category in menu_categories %}
                 {% if not category.children.all %}
 
                     <li class="nav-item active">
+
                 <a class="nav-link" href="{% url 'category_detail' category.slug %}">{{ category.title }}</a>
 
                 {% endif %}
 					{% endfor %}
 
+
                 </li>
 
 
 	    </ul>
-
             </div>
+
+
 
         <div id="cover">
             <form method="get" action="/search">
