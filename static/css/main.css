@@ -26,7 +26,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #000080!important;
+	background-color:hsl(0, 0%, 30%);
+
 }
 
 #cart-icon{
@@ -55,49 +56,6 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
-a.button1{
-display:inline-block;
-padding:0.35em 1.2em;
-border:0.1em solid #FFFFFF;
-margin:0 0.3em 0.3em 0;
-border-radius:0.12em;
-box-sizing: border-box;
-text-decoration:none;
-font-family:'Roboto',sans-serif;
-font-weight:300;
-color:#FFFFFF;
-text-align:center;
-transition: all 0.2s;
-}
-a.button1:hover{
-color:#000000;
-background-color:#FFFFFF;
-}
-@media all and (max-width:30em){
-a.button1{
-display:block;
-margin:0.4em auto;
-}
-}
-
-
-.bouncy{
-animation:bouncy 5s infinite linear;
-position:relative;
-}
-@keyframes bouncy {
-0%{top:0
-}
-40%{top:0
-}
-43%{top:-0.9em}
-46%{top:0
-}
-48%{top:-0.4em}
-50%{top:0
-}
-100%{top:0;}
-}
 
 
 .row-image{
@@ -112,7 +70,7 @@ position:relative;
 
 .cart-row{
 	display: flex;
-    align-items: flex-stretch;
+    align-items: stretch;
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
@@ -167,6 +125,15 @@ position:relative;
     color:inherit;
     opacity:0.75;
 }
+
+
+hr.rounded {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
+}
+
+
+
 
 
 
