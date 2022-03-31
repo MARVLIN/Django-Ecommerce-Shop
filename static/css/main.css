@@ -1,3 +1,7 @@
+@import url('https://rsms.me/inter/inter.css');
+
+
+
 body{
 	background-color: hsl(0, 0%, 98%);
 }
@@ -137,5 +141,8 @@ hr.rounded {
 .box_product_element {
 	border-radius: 20px;
 }
+
+
+
 
 

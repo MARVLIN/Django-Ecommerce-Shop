@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 import json
@@ -16,6 +17,7 @@ from django.shortcuts import render
 
 from django.db.models import Q
 
+
 def store(request):
     data = cartData(request)
 
@@ -23,9 +25,26 @@ def store(request):
     order = data['order']
     items = data['items']
 
-    products = Product.objects.all()
     obj = Carousel.objects.all()
-    context = {'products': products, 'cartItems': cartItems, 'obj': obj}
+
+    product_list = Product.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(product_list, 16)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    context = {
+
+        'products': products,
+        'cartItems': cartItems,
+        'obj': obj,
+    }
+
     return render(request, 'store/store.html', context)
 
 
@@ -108,8 +127,12 @@ def processOrder(request):
     return JsonResponse('Payment submitted..', safe=False)
 
 
-class ProductList(ListView):
+class ProductListView(ListView):
     model = Product
+    template_name = 'store/store.html'
+    context_object_name = 'products'
+    paginate_by = 2
+
 
 
 def product_detail(request, category_slug, slug):
@@ -134,6 +157,7 @@ def category_detail(request, slug):
 
     return render(request, 'store/category_detail.html', context)
 
+
 class SearchResultsView(ListView):
     model = Product
     template_name = 'store/search.html'
@@ -143,3 +167,18 @@ class SearchResultsView(ListView):
         query = self.request.GET.get('search')
         products = Product.objects.filter(Q(name__icontains=query))
         return products
+
+
+def index(request):
+    product_list = Product.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(product_list, 10)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    return render(request, 'store/store.html', { 'products': products })
